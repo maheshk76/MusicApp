@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>@ViewBag.Title</title>
+    <style>
+        .bottomPlayer {
+            position: fixed;
+            bottom: 0;
+            z-index: 2;
+            color: white;
+            background-color: gray;
+            width: 99%;
+            height: auto;
+        }
+        #controls{
+            text-align:center;
+        }
+        #controls li{
+            padding:10px;
+            display:inline-block;
+            list-style-type:none;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    @RenderBody()
+    <div class="bottomPlayer">
+        <img />
+        <audio id="plr"></audio>
+        <ol id="controls">
+            <button><li id="shuffle"><i class="fa fa-random"></i></li></button>
+            <button><li id="backward"><i class="fas fa-backward"></i></li></button>
+            <button><li id="play-pause"><i class="fa fa-pause"></i></li></button>
+            <button><li id="forward"><i class="fas fa-forward"></i></li></button>
+            <button><li id="repeat"><i class="fa fa-repeat"></i></li></button>
+        </ol>
+    </div>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</html>

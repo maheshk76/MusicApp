@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>@ViewBag.Title</title>
+    <!--<style>
+        .bottomPlayer {
+            position: fixed;
+            bottom: 0;
+            z-index: 2;
+            color: white;
+            background-color: transparent;
+            width: 99%;
+            height: 10px;
+            box-shadow: 0px 2px 4px #888888;
+            transition: 3s;
+            display:none;
+        }
+        #track-time {
+            height: 18px;
+            margin-bottom: 6px;
+            overflow: hidden;
+        }
+        #current-time, #track-length {
+            color: white;
+            font-size: 15px;
+            background-color: transparent;
+            border-radius: 10px;
+            transition: 0.3s ease all;
+        }
+        #current-time {
+            float: left;
+        }
+        #track-length {
+
+            float: right;
+        }
+        #track-time.active #current-time, #track-time.active #track-length {
+            color: white;
+            background-color: transparent;
+        }
+
+        #s-area, #seek-bar {
+            position: relative;
+            height: 4px;
+            border-radius: 4px;
+        }
+
+        #s-area {
+            background-color: #ffe8ee;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+        }
+
+        #ins-time {
+            position: absolute;
+            top: -29px;
+            color: #fff;
+            font-size: 12px;
+            white-space: pre;
+            padding: 5px 6px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        #s-hover {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0.2;
+            z-index: 2;
+        }
+
+        #ins-time, #s-hover {
+            background-color: grey;
+        }
+
+        #seek-bar {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            background-color: rgba(255, 170, 1, 0.786);
+            transition: 0.2s ease width;
+            z-index: 1;
+        }
+        #player-track{
+            width:100%;
+        }
+        #controls {
+            margin: 0;
+            padding-inline-start: 0px;
+        }
+
+            #controls > * {
+                font-size: 15px;
+                padding:12px 14px;
+                background-color: transparent;
+                border-radius: 100px;
+                outline: none;
+                border: none;
+            }
+        #play-pause {
+            border:1px solid grey;
+            font-size:20px;
+        }
+        #controls > *:active{
+            transform:scale(0.9,0.9);
+        }
+        #controls button li {
+            color: white;
+            font-weight: 100;
+        }
+            #controls button:hover li {
+                color: rgba(255, 170, 1, 0.786);
+            }
+            .album{
+                float:left;
+                width:25%;
+                margin:10px;
+            }
+            
+        #album-name {
+            font-size: 20px;
+            padding: 20px;
+        }
+        .album img {
+            float: left;
+        }
+        .con {
+            text-align:center;
+            float: left;
+            margin: 10px 20px 20px 0px;
+            width: 50%;
+        }
+        .make-fav{
+            background-color:transparent;
+            border:none;
+            outline:none;
+            color:white;
+        }
+    </style>-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    @RenderBody()
+    <!--<div class="bottomPlayer">
+        <div class="album">
+            <span id="album-name"></span><button title="Add to favourites" class="make-fav"><i class="fa fa-heart-o"></i></button>
+            <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg" width="100px" height="100px" />
+
+        </div>
+        <div class="con">
+            <ol id="controls">
+                <button title="Shuffle " id="shuffle"><li><i class="fa fa-random"></i></li></button>
+                <button title="Previous" id="backward"><li><i class="fas fa-backward"></i></li></button>
+                <button title="Play" id="play-pause"><li><i class="fa fa-pause"></i></li></button>
+                <button title="Next" id="forward"><li><i class="fas fa-forward"></i></li></button>
+                <button title="Repeat" id="repeat"><li><i class="fa fa-repeat"></i></li></button>
+            </ol>
+            <div id="player-track">
+                <div id="track-time">
+                    <div id="current-time">1</div>
+                    <div id="track-length">10</div>
+                </div>
+                <div id="s-area">
+                    <div id="ins-time"></div>
+                    <div id="s-hover"></div>
+                    <div id="seek-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        setTimeout(function showPlayer() {
+            $(".bottomPlayer").css("height", "120px");
+        }, 4000);
+        $(function () {
+            var playerTrack = $("#player-track"),
+                albumName = $('#album-name'), trackName = $('#track-name'),
+                sArea = $('#s-area'), seekBar = $('#seek-bar'), trackTime = $('#track-time'),
+                insTime = $('#ins-time'), sHover = $('#s-hover'),
+                playPauseButton = $("#play-pause"),
+                i = playPauseButton.find('i'),
+                tProgress = $('#current-time'),
+                tTime = $('#track-length'),
+                seekT, seekLoc, seekBarPos, cM, ctMinutes, ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime,
+                nTime = 0, buffInterval = null,
+                tFlag = false,
+                albums = ['Dawn', 'Me & You', 'Electro Boy', 'Home', 'Proxy (Original Mix)'],
+                trackNames = ['Skylike - Dawn', 'Alex Skrindo - Me & You', 'Kaaze - Electro Boy', 'Jordan Schor - Home', 'Martin Garrix - Proxy'],
+
+                trackUrl = ['https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3', 'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3', 'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3', 'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3', 'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
+                playPreviousTrackButton = $('#backward'),
+                playNextTrackButton = $('#forward'), currIndex = -1;
+
+            function playPause() {
+                setTimeout(function () {
+                    if (audio.paused) {
+                        playerTrack.addClass('active');
+                        checkBuffering();
+                        i.attr('class', 'fas fa-pause');
+                        audio.play();
+                    }
+                    else {
+                        playerTrack.removeClass('active');
+                        clearInterval(buffInterval);
+                        i.attr('class', 'fas fa-play');
+                        audio.pause();
+                    }
+                }, 300);
+            }
+
+
+            function showHover(event) {
+                seekBarPos = sArea.offset();
+                seekT = event.clientX - seekBarPos.left;
+                seekLoc = audio.duration * (seekT / sArea.outerWidth());
+
+                sHover.width(seekT);
+
+                cM = seekLoc / 60;
+
+                ctMinutes = Math.floor(cM);
+                ctSeconds = Math.floor(seekLoc - ctMinutes * 60);
+
+                if ((ctMinutes < 0) || (ctSeconds < 0))
+                    return;
+
+                if ((ctMinutes < 0) || (ctSeconds < 0))
+                    return;
+
+                if (ctMinutes < 10)
+                    ctMinutes = '0' + ctMinutes;
+                if (ctSeconds < 10)
+                    ctSeconds = '0' + ctSeconds;
+
+                if (isNaN(ctMinutes) || isNaN(ctSeconds))
+                    insTime.text('--:--');
+                else
+                    insTime.text(ctMinutes + ':' + ctSeconds);
+
+                insTime.css({ 'left': seekT, 'margin-left': '-21px' }).fadeIn(0);
+
+            }
+
+            function hideHover() {
+                sHover.width(0);
+                insTime.text('00:00').css({ 'left': '0px', 'margin-left': '0px' }).fadeOut(0);
+            }
+
+            function playFromClickedPos() {
+                audio.currentTime = seekLoc;
+                seekBar.width(seekT);
+                hideHover();
+            }
+
+            function updateCurrTime() {
+                nTime = new Date();
+                nTime = nTime.getTime();
+
+                if (!tFlag) {
+                    tFlag = true;
+                    trackTime.addClass('active');
+                }
+
+                curMinutes = Math.floor(audio.currentTime / 60);
+                curSeconds = Math.floor(audio.currentTime - curMinutes * 60);
+
+                durMinutes = Math.floor(audio.duration / 60);
+                durSeconds = Math.floor(audio.duration - durMinutes * 60);
+
+                playProgress = (audio.currentTime / audio.duration) * 100;
+
+                if (curMinutes < 10)
+                    curMinutes = '0' + curMinutes;
+                if (curSeconds < 10)
+                    curSeconds = '0' + curSeconds;
+
+                if (durMinutes < 10)
+                    durMinutes = '0' + durMinutes;
+                if (durSeconds < 10)
+                    durSeconds = '0' + durSeconds;
+
+                if (isNaN(curMinutes) || isNaN(curSeconds))
+                    tProgress.text('00:00');
+                else
+                    tProgress.text(curMinutes + ':' + curSeconds);
+
+                if (isNaN(durMinutes) || isNaN(durSeconds))
+                    tTime.text('00:00');
+                else
+                    tTime.text(durMinutes + ':' + durSeconds);
+
+                if (isNaN(curMinutes) || isNaN(curSeconds) || isNaN(durMinutes) || isNaN(durSeconds))
+                    trackTime.removeClass('active');
+                else
+                    trackTime.addClass('active');
+
+
+                seekBar.width(playProgress + '%');
+
+                if (playProgress == 100) {
+                    i.attr('class', 'fa fa-play');
+                    seekBar.width(0);
+                    tProgress.text('00:00');
+                    clearInterval(buffInterval);
+                }
+            }
+
+            function checkBuffering() {
+                clearInterval(buffInterval);
+                buffInterval = setInterval(function () {
+                    bTime = new Date();
+                    bTime = bTime.getTime();
+
+                }, 100);
+            }
+
+            function selectTrack(flag) {
+                if (flag == 0 || flag == 1)
+                    ++currIndex;
+                else
+                    --currIndex;
+
+                if ((currIndex > -1) && (currIndex <2)) {
+                    if (flag == 0) {
+                        i.attr('class', 'fa fa-play');
+
+                        $("#play-pause").attr('title', 'Pause');
+                    }
+                    else {
+                        i.attr('class', 'fa fa-pause');
+                        $("#play-pause").attr('title', 'Play');
+                    }
+
+                    seekBar.width(0);
+                    trackTime.removeClass('active');
+                    tProgress.text('00:00');
+                    tTime.text('00:00');
+
+                    currAlbum = albums[currIndex];
+                    currTrackName = trackNames[currIndex];
+
+                    audio.src = trackUrl[currIndex];
+
+                    nTime = 0;
+                    bTime = new Date();
+                    bTime = bTime.getTime();
+
+                    if (flag != 0) {
+                        audio.play();
+                        playerTrack.addClass('active');
+
+                        clearInterval(buffInterval);
+                        checkBuffering();
+                    }
+                    //$("title").html(currAlbum + "(" + currTrackName+")");
+                    albumName.text(currAlbum);
+                    trackName.text(currTrackName);
+                }
+                else {
+                    if (flag == 0 || flag == 1)
+                        --currIndex;
+                    else
+                        ++currIndex;
+                }
+            }
+
+            function initPlayer() {
+                audio = new Audio();
+
+                selectTrack(0);
+
+                audio.loop = false;
+
+                playPauseButton.on('click', playPause);
+
+                sArea.mousemove(function (event) { showHover(event); });
+
+                sArea.mouseout(hideHover);
+
+                sArea.on('click', playFromClickedPos);
+
+                $(audio).on('timeupdate', updateCurrTime);
+
+                playPreviousTrackButton.on('click', function () { selectTrack(-1); });
+                playNextTrackButton.on('click', function () { selectTrack(1); });
+            }
+
+            initPlayer();
+        });
+    </script>-->
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</html>

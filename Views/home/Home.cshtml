@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Home.css" />
+    <script src="~/Scripts/jquery-latest.js"></script>
+</head>
+<body>
+    <section id="hea">
+        <div id="nav">
+            <ol>
+                <li id="sidebarbutton" onclick="openNav()">&#9776;</li>
+                <li id="logo">@Html.ActionLink("AppName", "home", "home", null, new { @class = "link" })</li>
+            </ol>
+            <ol>
+                <a href='@Url.Action("settings","account")'><li id="settings"><i class="fa fa-cog"></i></li></a>
+                <li id="signup">@Html.ActionLink("SIGNUP", "signup", "account", null, new { @class = "link",@id="signup" })</li>
+                <li id="login">@Html.ActionLink("LOGIN", "login", "account", null, new { @class = "link",@id="login" })</li>
+                <li id="profile" onclick="openNavRight()"><i id="proimg"></i> &nbsp;<span id="uname">Mahesh Kantariya</span></li>
+            </ol>
+        </div>
+    </section>
+    <section>
+        <div id="mySidenav" class="sidenav">
+            <span id="0"><i class="fa fa-home"></i> Home</span>
+            <span id="1"><i class="fa fa-search"></i> Search</span>
+            <span id="2">&#9776; Playlists</span>
+            <span id="3"><i class="fa fa-heart"></i> Favourites</span>
+        </div>
+        <div id="mySidenavRight" class="sidenavright">
+            <a href="@Url.Action("profile", "account")">Profile</a>
+            <a href="#">Logout</a>
+        </div>
+    </section>
+    <div id="tabs">
+        <section id="home">
+            <h1>Main Page</h1>
+        </section>
+        <section id="search">
+            <input id="searchbar" type="search" placeholder="Search for Songs,Albums,Artist ..">
+        </section>
+        <section id="playlists">
+            <h1>Playlists</h1>
+        </section>
+        <section id="favs">
+            <h1>Favourites</h1>
+        </section>
+    </div>
+    <footer>
+    </footer>
+</body>
+</html>
+<script src="~/Scripts/Home.js"></script>

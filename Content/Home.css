@@ -1,0 +1,223 @@
+﻿body {
+    background-color: rgba(0, 0, 0, 0.849);
+    overflow: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    user-select: none;
+}
+
+#nav {
+    background-color: rgba(255, 170, 1, 0.786);
+    width: 100%;
+    float: left;
+}
+
+ol li {
+    color: white;
+}
+
+
+#nav ol:first-child {
+    position: absolute;
+    padding: 0px;
+}
+
+    #nav ol:first-child li {
+        display: inline;
+        padding: 40px;
+        width: 100%;
+        font-size: 30px;
+    }
+
+#sidebarbutton {
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+#nav ol:last-child {
+    float: right;
+    padding: 10px 20px 10px 30px;
+}
+
+ol {
+    list-style-type: none;
+}
+
+#profile {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.753);
+    border-radius: 25px;
+    padding-right: 20px;
+    cursor: pointer;
+    display: inline;
+}
+
+    #profile:hover {
+        opacity: 0.9;
+    }
+
+#settings,
+#signup,
+#login {
+    display: inline;
+    transition: 0.2s;
+}
+
+#settings{
+    padding-right: 30px;
+}
+
+#nav ol:last-child li {
+    font-size: 18px;
+}
+
+#login {
+    padding: 10px 20px 10px;
+}
+
+    #login:hover,
+    #signup:hover,
+    #settings:hover {
+        color: black;
+    }
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 35px;
+    margin-top: 78px;
+}
+
+    .sidenav span {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        color:white;
+        display: block;
+        transition: 0.2s;
+    }
+
+        .sidenav span:hover {
+            color: #f1f1f1;
+            color: rgba(255, 170, 1, 0.786);
+        }
+
+
+.sidenavright {
+    height: auto;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding: 15px 0px 15px;
+    margin-top: 78px;
+    right: 0;
+}
+
+    .sidenavright a {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        color:white;
+        display: block;
+        transition: 0.2s;
+        text-align: center;
+    }
+
+        .sidenavright a:hover {
+            color: #f1f1f1;
+            color: rgba(255, 170, 1, 0.786);
+        }
+
+
+#home,
+#search,
+#playlists,
+#favs {
+    background-color: transparent;
+    color: white;
+    height: auto;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: auto;
+    transition: .3s;
+}
+
+#searchbar {
+    padding: 20px;
+    height: 50px;
+    width: 50%;
+    font-size: 18px;
+    border-radius: 20px;
+    outline: none;
+    margin: 30px 25% 0px 25%;
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    transition: 0.2s;
+}
+
+    #searchbar::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background-size: contain;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #searchbar::-webkit-input-placeholder {
+        color: white;
+        opacity: 0.2;
+    }
+
+    #searchbar:focus::-webkit-search-cancel-button {
+        opacity: 1;
+        filter: invert(1);
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times.svg) no-repeat 50% 50%;
+        pointer-events: all;
+    }
+
+#tabs {
+    height: 100%;
+    margin-left: 0px;
+}
+
+
+
+*::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+    outline: none;
+}
+
+#proimg {
+    background-image: url(IMG_20201222_084051.jpg);
+    width: 26px;
+    height: 30px;
+    border-radius: 68px;
+    position: relative;
+    background-size: cover;
+    padding: 0px 8px 0px 20px;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}

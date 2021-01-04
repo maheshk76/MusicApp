@@ -1,0 +1,99 @@
+﻿body {
+    background-color: rgba(0, 0, 0, 0.849);
+    overflow: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    user-select: none;
+    color: white;
+}
+
+#proinfo {
+    width: 740px;
+    height: 250px;
+    position: relative;
+    margin: 30px 25% 0px 25%;
+}
+
+#proimg {
+    background-image: url(IMG_20201222_084051.jpg);
+    border-radius: 250px;
+    position: relative;
+    background-size: cover;
+    padding: 100px;
+    position: absolute;
+}
+
+#up {
+    position: absolute;
+    z-index: 1;
+    color: transparent;
+    margin-left: -50px;
+    text-align: center;
+    width: 100px;
+    outline: none;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+    #up::-webkit-file-upload-button {
+        outline: none;
+        width: 100px;
+        height: 100px;
+        border: none;
+        border-radius: 100px;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+    }
+
+#proimg:hover #up {
+    opacity: 1;
+}
+
+#etable {
+    margin: 30px 25% 0px 25%;
+}
+
+#uname {
+    font-size: 60px;
+    margin-left: 250px;
+    margin-top: 60px;
+    position: absolute;
+}
+
+#mail {
+    width: 400px;
+}
+
+#dob {
+    width: 200px;
+}
+
+#mail,
+#dob,
+#gender {
+    height: 35px;
+    background-color: transparent;
+    outline: none;
+    color: white;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+#gender {
+    width: 100px;
+}
+
+legend {
+    font-size: 20px;
+    padding: 0px 10px 0px 10px;
+}
+
+#but {
+    font-size: 20px;
+    padding: 5px 10px 5px;
+    background-color: rgba(255, 170, 1, 0.786);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+}

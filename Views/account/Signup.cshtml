@@ -1,0 +1,63 @@
+﻿@using MusicApp.Models
+@model SignupViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Signup";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Signup.css" />
+    <script src="~/Scripts/Signup.js"></script>
+    <script src="~/Scripts/jquery-latest.js"></script>
+    <script>
+        $(function () {
+            $("#username,#email,#gender,#pass,#cpass,#bdate").attr("required", "true");
+        });
+    </script>
+</head>
+<body>
+    <section id="signup">
+        @using (Html.BeginForm("home", "home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "sform", role = "form" }))
+        {
+            if (!(Request.IsAuthenticated))
+            {
+                @Html.AntiForgeryToken()
+                <h1>Signup</h1><br>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Name)<br>
+                @Html.TextBoxFor(m => m.Name, new { @id = "username", @autofocus = "autofocus" })<br><br>
+                @Html.LabelFor(m => m.Email)<br>
+                @Html.TextBoxFor(m => m.Email, new { @id = "email" })<br><br>
+                @Html.LabelFor(m => m.Date_of_birth)<br>
+                @Html.TextBoxFor(m => m.Name, new { @id = "bdate", type = "date", max = DateTime.Now.ToString("yyyy-MM-dd") })<br><br>
+                @Html.LabelFor(m => m.Gender)<br>
+                @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>{
+            new SelectListItem { Text = "Male", Value = "Male", Selected=true},
+            new SelectListItem { Text = "Female", Value = "Female"},
+            new SelectListItem { Text = "Other", Value = "Other"},
+       }, new { @id = "gender" })<br><br>
+                @Html.LabelFor(m => m.Password)<br>
+                @Html.PasswordFor(m => m.Password, new { @id = "pass" })<br><br>
+                @Html.LabelFor(m => m.ConfirmPassword)<br>
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "cpass", @oninput = "checkPassword();" })<br>
+                <p id="error"></p>
+                <span id="show"><input type="checkbox" onchange="showHide()">Show password</span>
+                <button id="signupbutton" type="submit">Signup</button><br><br>
+                <h2><span>or signup via</span></h2>
+                <ol>
+                    <li><button id="fb" type="button">Facebook</button></li>
+                    <li><button id="g" type="button">Google</button></li>
+                </ol>
+                <hr style="color:black;">
+                <p>Already have an account?</p>
+                <button id="newAc">@Html.ActionLink("Login", "login", "account", null, new { @class = "link" })</button>
+            }
+        }
+    </section>
+</body>
+</html>

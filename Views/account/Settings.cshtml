@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Settings";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/Settings.css" />
+</head>
+<body>
+    <h1>Settings</h1>
+    <fieldset>
+        <legend>Proflie</legend>
+        <div id="prof">
+            <p>
+                <span class="smalltxt">Signed in as</span><br>
+                <a href="profile.html"><span id="username">Mahesh Kantariya</span></a>
+            </p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Audio Quality</legend>
+        <div id="strm">
+            <label for="st">Streaming</label>
+            <select id="st">
+                <option value="Low">Low</option>
+                <option value="Normal" selected>Normal</option>
+                <option value="High">High</option>
+            </select><br><br><input type="checkbox"> Datasaver&nbsp; <span class="smalltxt">listen in low network</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Playback</legend>
+        <div id="plb">
+            <input id='aplay' type="checkbox"> AutoPlay &nbsp;&nbsp;<span class="smalltxt">Play next track automatically</span>
+            <br><br>
+            <input id='aplay' type="checkbox"> Normalize Volume &nbsp;&nbsp;<span class='smalltxt'>Set same volume level for all tracks</span>
+        </div>
+    </fieldset>
+    <fieldset id="abo">
+        <legend>About</legend>
+        <div id="info">
+            <p>Version&nbsp;&nbsp;<span class="smalltxt"> 0.0.1</span></p>
+            <p>Terms and Conditions&nbsp;&nbsp;</p>
+            <p>Privacy Policy&nbsp;&nbsp;</p>
+        </div>
+    </fieldset>
+    <br><br>
+    <script>
+        var slider = document.getElementById("slider");
+        var output = document.getElementById("val");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    user-select: none;
+}
+
+input,
+button,
+select {
+    outline: none;
+}
+
+section {
+    position: relative;
+    padding: 20px 50px 50px 50px;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 50px;
+    width: 400px;
+    font-size: medium;
+}
+
+form {
+    position: relative;
+    width: 100%;
+}
+
+    form h1 {
+        text-align: center;
+    }
+
+#username,
+#email,
+#bdate,
+#gender,
+#cpass,
+#pass {
+    width: 400px;
+    height: 30px;
+    position: relative;
+    margin: auto;
+    border: none;
+    margin-top: 5px;
+    padding-left: 10px;
+    border-bottom: 2px solid lightgray;
+    outline: none;
+    font-size: 17px;
+}
+
+    #username:focus,
+    #email:focus,
+    #bdate:focus,
+    #gender:focus,
+    #cpass:focus,
+    #pass:focus {
+        border-bottom: 2px solid black;
+        transition: 0.4s;
+    }
+
+#gender {
+    width: 150px;
+}
+
+#signupbutton {
+    width: max-content;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    background-color: inherit;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    padding: 10px;
+    float: right;
+    border: 1px solid black;
+    background-color: rgba(255, 170, 1, 0.747);
+}
+
+    #signupbutton:focus {
+        opacity: 0.8;
+    }
+
+h2 {
+    width: 400px;
+    text-align: center;
+    border-bottom: 1.3px solid gray;
+    line-height: 0.1em;
+    margin: 0px;
+    color: black;
+    font-size: 17px;
+    font-weight: 100;
+}
+
+    h2 span {
+        background: white;
+        padding: 0 10px;
+    }
+
+#fb {
+    color: white;
+    background-color: cornflowerblue;
+}
+
+#g {
+    color: white;
+    background-color: lightcoral;
+}
+
+hr + p {
+    text-align: center;
+    margin-top: 15px;
+    margin: 15px 0px 5px;
+}
+
+ol {
+    text-align: center;
+    padding-inline-start: 0px;
+    padding: 10px;
+}
+
+li {
+    display: inline;
+    padding: 0px 10px 0px 10px;
+}
+
+    li button {
+        width: 100px;
+        padding: 6px;
+        font-size: 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: inherit;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        outline: none;
+    }
+
+#newAc {
+    position: relative;
+    background-color: inherit;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: gray;
+}
+
+button:hover {
+    transform: scale(1.07, 1.07);
+    transition: 0.1s;
+}
+
+#show {
+    float: left;
+    text-align: center;
+    margin-top: 10px;
+    font-size: medium;
+}
+
+#error {
+    color: red;
+}
+
+.link {
+    text-decoration: none;
+    color: gray;
+}
